@@ -3,8 +3,8 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Experiences from "./components/Experiences";
 import Projects from "./components/Projects";
-import Footer from "./components/Footer";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -14,12 +14,12 @@ export default function App() {
         <Home />
       </div>
       <About />
-       <div className="p-5 md:px-[15%]">
-          <Experiences />
-          <Projects />
-          <Contact />
-       </div>
-       <Footer/> 
-    </div> 
-  )
+      <div className="p-5 md:px-[15%]">
+        <Experiences />
+        <Projects />
+        <Contact />
+      </div>
+      <Footer />
+    </div>
+  );
 }

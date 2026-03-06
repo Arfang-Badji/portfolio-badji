@@ -11,56 +11,56 @@ const projects = [
   {
     id: 1,
     title: "Gestionnaire de taches",
-    description:
-      "Application pour organiser les tâches et améliorer la productivité.",
+    description: "Application pour organiser les tâches et améliorer la productivité.",
     technologies: ["React", "Node.js", "Tailwind CSS"],
     image: img1,
     github: "https://github.com/Arfang-Badji/portfolio-badji",
+    live: "https://portfolio-badji.vercel.app",
   },
   {
     id: 2,
     title: "Plateforme E-commerce",
-    description:
-      "Plateforme de vente en ligne avec gestion des produits et panier.",
+    description: "Plateforme de vente en ligne avec gestion des produits et panier.",
     technologies: ["React", "Node.js", "Tailwind CSS"],
     image: img2,
     github: "https://github.com/Arfang-Badji/portfolio-badji",
+    live: "https://portfolio-badji.vercel.app",
   },
   {
     id: 3,
     title: "Portfolio Web",
-    description:
-      "Portfolio personnel pour présenter mes projets et compétences.",
+    description: "Portfolio personnel pour présenter mes projets et compétences.",
     technologies: ["React", "TypeScript", "Tailwind CSS"],
     image: img3,
     github: "https://github.com/Arfang-Badji/portfolio-badji",
+    live: "https://portfolio-badji.vercel.app",
   },
   {
     id: 4,
     title: "Application de chat en temps réel",
-    description:
-      "Application de messagerie permettant de discuter instantanément.",
+    description: "Application de messagerie permettant de discuter instantanément.",
     technologies: ["React", "Node.js", "Socket.io"],
     image: img4,
     github: "https://github.com/Arfang-Badji/portfolio-badji",
+    live: "https://portfolio-badji.vercel.app",
   },
   {
     id: 5,
     title: "Système de réservation de salles",
-    description:
-      "Application permettant de réserver des salles de réunion.",
+    description: "Application permettant de réserver des salles de réunion.",
     technologies: ["React", "Node.js", "MongoDB"],
     image: img5,
     github: "https://github.com/Arfang-Badji/portfolio-badji",
+    live: "https://portfolio-badji.vercel.app",
   },
   {
     id: 6,
     title: "Analyseur de sentiments",
-    description:
-      "Application qui analyse les sentiments dans les publications des réseaux sociaux.",
+    description: "Application qui analyse les sentiments dans les publications des réseaux sociaux.",
     technologies: ["Python", "React", "API"],
     image: img6,
     github: "https://github.com/Arfang-Badji/portfolio-badji",
+    live: "https://portfolio-badji.vercel.app",
   },
 ];
 
@@ -82,7 +82,6 @@ const Projects = () => {
             />
 
             <h1 className="mt-3 text-xl font-bold">{project.title}</h1>
-
             <p className="text-sm mt-2">{project.description}</p>
 
             <div className="flex flex-wrap gap-2 my-3">
@@ -94,6 +93,15 @@ const Projects = () => {
             </div>
 
             <div className="flex gap-3 mt-3">
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-primary btn-sm"
+              >
+                Voir le site
+              </a>
+
               <a
                 href={project.github}
                 target="_blank"

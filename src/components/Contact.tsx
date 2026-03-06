@@ -1,131 +1,81 @@
-import { useState, useEffect, useRef } from "react";
-import Title from "./Title";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Title from "./Title";
 
 const Contact = () => {
-  // Etats du formulaire
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
   const form = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  // Message temporaire
-  useEffect(() => {
-    if (submitted) {
-      const timer = setTimeout(() => setSubmitted(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [submitted]);
-
-  // Envoi du formulaire
-  const handleSubmit = (e: React.FormEvent) => {
+  const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!form.current) return;
+
+    setStatus("sending");
 
     emailjs
       .sendForm(
-        "service_tinon99",
-        "template_sd3xpc5",
+        import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
         form.current,
-        "pF_a8G-nWzPRwVeOk"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
-        setSubmitted(true);
-        setName("");
-        setEmail("");
-        setMessage("");
+        setStatus("success");
+        form.current?.reset();
       })
       .catch((err) => {
-        console.error("Erreur lors de l'envoi :", err);
+        console.error("EmailJS Error:", err);
+        setStatus("error");
       });
   };
 
   return (
-    <div id="contact" className="mt-16">
+    <section id="contact" className="mt-16 px-4 md:px-0">
       <Title title="CONTACT" />
-
-      <div className="flex flex-col items-center justify-center mt-8">
-        {/* Réseaux sociaux */}
-        <div className="flex gap-6 mb-6">
-          <a
-            href="https://github.com/"
-            target="_blank"
-            className="text-xl font-bold hover:text-accent"
-          >
-            GitHub
-          </a>
-
-          <a
-            href="https://linkedin.com/"
-            target="_blank"
-            className="text-xl font-bold hover:text-accent"
-          >
-            LinkedIn
-          </a>
-
-          <a
-            href="mailto:badjiarfang94@gmail.com"
-            className="text-xl font-bold hover:text-accent"
-          >
-            Email
-          </a>
-        </div>
-
-        {/* Formulaire */}
+      <div className="flex flex-col items-center justify-center gap-4">
         <form
           ref={form}
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full max-w-md p-6 space-y-4 shadow-xl bg-[#282A36] rounded-xl"
+          onSubmit={sendEmail}
+          className="flex flex-col w-full max-w-md gap-4 p-6 bg-[#282A36] rounded-xl shadow-xl"
         >
           <input
             type="text"
             name="user_name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
             placeholder="Votre nom"
-            className="p-2 font-bold text-black border rounded-lg outline-none border-base-300"
+            className="p-3 rounded-lg text-black outline-none border border-gray-400"
             required
           />
-
           <input
             type="email"
             name="user_email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="Votre email"
-            className="p-2 font-bold text-black border rounded-lg outline-none border-base-300"
+            className="p-3 rounded-lg text-black outline-none border border-gray-400"
             required
           />
-
           <textarea
             name="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            rows={4}
             placeholder="Votre message"
-            className="p-2 font-bold text-black border rounded-lg outline-none border-base-300"
+            rows={5}
+            className="p-3 rounded-lg text-black outline-none border border-gray-400"
             required
           />
-
           <button
             type="submit"
-            className="p-2 font-bold text-black transition rounded-lg bg-accent hover:opacity-80"
+            className="p-3 font-bold text-black transition bg-accent rounded-lg hover:opacity-80"
+            disabled={status === "sending"}
           >
-            Envoyer
+            {status === "sending" ? "Envoi..." : "Envoyer"}
           </button>
         </form>
 
-        {/* Message confirmation */}
-        {submitted && (
-          <p className="mt-4 font-semibold text-green-400">
-            ✅ Message envoyé avec succès !
-          </p>
+        {status === "success" && (
+          <p className="text-green-400 font-semibold">✅ Message envoyé avec succès !</p>
+        )}
+        {status === "error" && (
+          <p className="text-red-500 font-semibold">❌ Une erreur est survenue.</p>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
