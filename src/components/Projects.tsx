@@ -11,57 +11,69 @@ const projects = [
   {
     id: 1,
     title: "Gestionnaire de taches",
-    description: "Application pour organiser vos taches.",
+    description:
+      "Application pour organiser les tâches et améliorer la productivité.",
     technologies: ["React", "Node.js", "Tailwind CSS"],
     image: img1,
+    github: "https://github.com/Arfang-Badji/portfolio-badji",
   },
   {
     id: 2,
     title: "Plateforme E-commerce",
-    description: "Application e-commerce moderne.",
+    description:
+      "Plateforme de vente en ligne avec gestion des produits et panier.",
     technologies: ["React", "Node.js", "Tailwind CSS"],
     image: img2,
+    github: "https://github.com/Arfang-Badji/portfolio-badji",
   },
   {
     id: 3,
-    title: "Portfolio Developer",
-    description: "Portfolio pour développeur.",
-    technologies: ["React", "Tailwind CSS"],
+    title: "Portfolio Web",
+    description:
+      "Portfolio personnel pour présenter mes projets et compétences.",
+    technologies: ["React", "TypeScript", "Tailwind CSS"],
     image: img3,
+    github: "https://github.com/Arfang-Badji/portfolio-badji",
   },
   {
     id: 4,
-    title: "Application Chat",
-    description: "Chat en temps réel.",
-    technologies: ["React", "Node.js"],
+    title: "Application de chat en temps réel",
+    description:
+      "Application de messagerie permettant de discuter instantanément.",
+    technologies: ["React", "Node.js", "Socket.io"],
     image: img4,
+    github: "https://github.com/Arfang-Badji/portfolio-badji",
   },
   {
     id: 5,
-    title: "Systeme de reservation",
-    description: "Application de reservation de salles.",
-    technologies: ["React", "Node.js"],
+    title: "Système de réservation de salles",
+    description:
+      "Application permettant de réserver des salles de réunion.",
+    technologies: ["React", "Node.js", "MongoDB"],
     image: img5,
+    github: "https://github.com/Arfang-Badji/portfolio-badji",
   },
   {
     id: 6,
     title: "Analyseur de sentiments",
-    description: "Analyse des sentiments des reseaux sociaux.",
-    technologies: ["React", "Node.js"],
+    description:
+      "Application qui analyse les sentiments dans les publications des réseaux sociaux.",
+    technologies: ["Python", "React", "API"],
     image: img6,
+    github: "https://github.com/Arfang-Badji/portfolio-badji",
   },
 ];
 
 const Projects = () => {
   return (
-    <div id="projects" className="mt-10">
+    <section id="projects" className="mt-10">
       <Title title="MES PROJETS" />
 
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3">
         {projects.map((project) => (
           <div
             key={project.id}
-            className="p-5 bg-gray-800 shadow-lg rounded-xl"
+            className="p-5 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition"
           >
             <img
               src={project.image}
@@ -69,9 +81,9 @@ const Projects = () => {
               className="object-cover w-full h-56 rounded-xl"
             />
 
-            <h1 className="my-2 font-bold">{project.title}</h1>
+            <h1 className="mt-3 text-xl font-bold">{project.title}</h1>
 
-            <p className="text-sm">{project.description}</p>
+            <p className="text-sm mt-2">{project.description}</p>
 
             <div className="flex flex-wrap gap-2 my-3">
               {project.technologies.map((tech, index) => (
@@ -80,10 +92,21 @@ const Projects = () => {
                 </span>
               ))}
             </div>
+
+            <div className="flex gap-3 mt-3">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-accent btn-sm"
+              >
+                Voir le code
+              </a>
+            </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
